@@ -1,7 +1,7 @@
 import { Restaurant } from '../restaurant.model';
 import { db } from '../../mock-data';
 
-// TODO Test to this function
+// TODO Test all functions
 export const paginateRestaurantList = (
   restaurantList: Restaurant[],
   page: number,
