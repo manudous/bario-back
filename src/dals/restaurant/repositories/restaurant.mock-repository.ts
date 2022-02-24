@@ -10,6 +10,8 @@ import {
 export const mockRepository: RestaurantRepository = {
   getRestaurantList: async (page: number, pageSize: number) =>
     paginateRestaurantList(db.restaurants, page, pageSize),
+  getRestaurantByUrlName: async (urlName: string) =>
+    db.restaurants.find((restaurant) => restaurant.urlName === urlName),
   getRestaurant: async (id: string) =>
     db.restaurants.find((restaurant) => restaurant._id.toHexString() === id),
   saveRestaurant: async (restaurant: Restaurant) =>

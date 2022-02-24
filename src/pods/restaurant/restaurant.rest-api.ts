@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { restaurantRepository } from 'dals';
+import { restaurantDbRepository } from 'dals';
 import {
   mapRestaurantFromApiModelToModel,
   mapRestaurantFromModelToApiModel,
@@ -20,7 +20,7 @@ restaurantApi
     try {
       const page = Number(req.query.page);
       const pageSize = Number(req.query.pageSize);
-      const restaurantList = await restaurantRepository.getRestaurantList(
+      const restaurantList = await restaurantDbRepository.getRestaurantList(
         page,
         pageSize
       );
@@ -36,7 +36,7 @@ restaurantApi
   .get('/:id', async (req, res, next) => {
     try {
       const { id } = req.params;
-      const restaurant = await restaurantRepository.getRestaurant(id);
+      const restaurant = await restaurantDbRepository.getRestaurant(id);
       res.send(mapRestaurantFromModelToApiModel(restaurant));
     } catch (error) {
       next(error);
@@ -48,7 +48,7 @@ restaurantApi
   .post('/', async (req, res, next) => {
     try {
       const restaurant = mapRestaurantFromApiModelToModel(req.body);
-      const newRestaurant = await restaurantRepository.saveRestaurant(
+      const newRestaurant = await restaurantDbRepository.saveRestaurant(
         restaurant
       );
       res.status(201).send(newRestaurant);
@@ -63,7 +63,7 @@ restaurantApi
     try {
       const { id } = req.params;
       const restaurant = req.body;
-      await restaurantRepository.saveRestaurant({ ...restaurant, id });
+      await restaurantDbRepository.saveRestaurant({ ...restaurant, id });
       res.sendStatus(204).send('Restaurant modify');
     } catch (error) {
       next(error);
@@ -75,7 +75,7 @@ restaurantApi
   .delete('/:id', async (req, res, next) => {
     try {
       const { id } = req.params;
-      await restaurantRepository.deleteRestaurant(id);
+      await restaurantDbRepository.deleteRestaurant(id);
       res.sendStatus(204).send('Restaurant deleted');
     } catch (error) {
       next(error);

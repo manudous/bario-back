@@ -1,7 +1,7 @@
 import { prompt } from 'inquirer';
 import { connectToDBServer, disconnectFromDbServer } from 'core/servers';
 import { envConstants } from 'core/constants';
-import { mapRestaurantFromApiToModel } from 'pods/restaurant/restaurant.mappers';
+import { mapRestaurantFromApiModelToModel } from 'pods/restaurant/restaurant.mappers';
 import { restaurantDbRepository } from 'dals';
 import { inputQuestion, confirmFile } from '../questions';
 
@@ -23,7 +23,7 @@ export const run = async () => {
         throw 'Restaurant with this name exist in data base';
       } else {
         await restaurantDbRepository.saveRestaurant(
-          mapRestaurantFromApiToModel(restaurant)
+          mapRestaurantFromApiModelToModel(restaurant)
         );
 
         console.log('Restaurant created:', { restaurant: file });
