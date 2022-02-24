@@ -1,5 +1,5 @@
 import { Restaurant } from './restaurant';
-
+import { ObjectId } from "mongodb";
 export interface DB {
   restaurants: Restaurant[];
 }
@@ -7,7 +7,7 @@ export interface DB {
 export const db: DB = {
   restaurants: [
     {
-      id: "1",
+      _id: new ObjectId(),
       name: "Paluba II",
       urlName: "paluba",
       phone: "606 629 069",

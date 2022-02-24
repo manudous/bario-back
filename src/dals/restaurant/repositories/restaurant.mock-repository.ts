@@ -11,14 +11,14 @@ export const mockRepository: RestaurantRepository = {
   getRestaurantList: async (page: number, pageSize: number) =>
     paginateRestaurantList(db.restaurants, page, pageSize),
   getRestaurant: async (id: string) =>
-    db.restaurants.find((restaurant) => restaurant.id === id),
+    db.restaurants.find((restaurant) => restaurant._id.toHexString() === id),
   saveRestaurant: async (restaurant: Restaurant) =>
-    Boolean(restaurant.id)
+    Boolean(restaurant._id)
       ? updateRestaurant(restaurant)
       : insertRestaurant(restaurant),
   deleteRestaurant: async (id: string) => {
     db.restaurants = db.restaurants.filter(
-      (restaurant) => restaurant.id !== id
+      (restaurant) => restaurant._id.toHexString() !== id
     );
     return true;
   },

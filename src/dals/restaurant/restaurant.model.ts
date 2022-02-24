@@ -1,4 +1,5 @@
-import { RestaurantTheme } from '../../common-app/models';
+import { RestaurantTheme } from 'common-app/models';
+import { ObjectId } from "mongodb";
 
 export interface RationType {
   unit: string;
@@ -28,7 +29,7 @@ export interface RationDefinition {
 }
 
 export interface Restaurant {
-  id: string;
+  _id: ObjectId;
   name: string;
   urlName: string;
   phone: string;

@@ -1,5 +1,6 @@
 import { Restaurant } from '../restaurant.model';
 import { db } from '../../mock-data';
+import { ObjectId } from 'mongodb';
 
 // TODO Test all functions
 export const paginateRestaurantList = (
@@ -23,10 +24,10 @@ export const paginateRestaurantList = (
 };
 
 export const insertRestaurant = async (restaurant) => {
-  const id = String(db.restaurants.length + 1);
+  const _id = new ObjectId();
   const newRestaurant = {
     ...restaurant,
-    id,
+    _id,
   };
 
   db.restaurants = [...db.restaurants, newRestaurant];
@@ -35,7 +36,7 @@ export const insertRestaurant = async (restaurant) => {
 
 export const updateRestaurant = async (updateRestaurant: Restaurant) => {
   db.restaurants = db.restaurants.map((restaurant) =>
-    restaurant.id === updateRestaurant.id
+    restaurant._id.toHexString() === updateRestaurant._id.toHexString()
       ? { ...restaurant, ...updateRestaurant }
       : restaurant
   );

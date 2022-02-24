@@ -1,6 +1,7 @@
 import * as model from 'dals';
 import * as apiModel from './restaurant.api-model';
 import { mapToCollection } from 'common/mappers';
+import { ObjectId } from 'mongodb';
 
 // mapper from apimodel to Model
 export const reduceCategoryEntryListToRationDefinitionList = (
@@ -95,7 +96,7 @@ const mapFromCategoryEntryToItemsByCategory = (
 export const mapRestaurantFromApiModelToModel = (
   restaurant: apiModel.RestaurantApiModel
 ): model.Restaurant => ({
-  id: restaurant.id,
+  _id: new ObjectId(restaurant.id),
   name: restaurant.name,
   urlName: restaurant.urlName,
   phone: restaurant.phone,
@@ -170,7 +171,7 @@ export const mapRestaurantListFromModelToApiModel = (
 export const mapRestaurantFromModelToApiModel = (
   restaurant: model.Restaurant
 ): apiModel.RestaurantApiModel => ({
-  id: restaurant.id,
+  id: restaurant._id.toHexString(),
   name: restaurant.name,
   urlName: restaurant.urlName,
   phone: restaurant.phone,
