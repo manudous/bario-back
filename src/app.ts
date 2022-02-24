@@ -1,8 +1,7 @@
-import express from 'express';
 import path from 'path';
 import { createRestApiServer } from 'core/servers';
 import { envConstants } from 'core/constants';
-import { restaurantApi } from './restaurant.api';
+import { restaurantApi } from './pods/restaurant';
 
 const restApiServer = createRestApiServer();
 

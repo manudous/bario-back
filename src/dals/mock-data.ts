@@ -26,43 +26,31 @@ export const db: DB = {
               name: "Paluba Burguer",
               description: "Pan Brioche, 285 gr. de carne de Buey, Queso Cheda, Lechuga, tomate, cebolla roja a la plancha, pepinillo",
               price: 7.8,
-              priceByRation: null,
-              unit: null
             },
             {
               name: "Black Angus XL",
               description: "Pan de sésamo, 200 gr. de carne de Angus, bacon, Doble de queso Chedar, Cebolla blanca pochada con BBQ, canónigos",
               price: 7,
-              priceByRation: null,
-              unit: null
             },
             {
               name: "Pulled Pork",
               description: "Pan rústico, Pulled Pork, A elegir: (1) Aguacate, cebolla encurtida y pepinillo (2) Ensaladilla de col",
               price: 6.5,
-              priceByRation: null,
-              unit: null
             },
             {
               name: "Chicharron's Burguer",
               description: "Pan rústico, Carne picada & chicharrones, A elegir: queso semicurado o queso de cabra, Lechuga, tomate y cebolla pochada",
               price: 5.5,
-              priceByRation: null,
-              unit: null
             },
             {
               name: "Buey Burguer",
               description: "Pan de sésamo, Carne de Buey, bacon, Queso, Cebolla blanca, lechuga y tomate",
               price: 5.5,
-              priceByRation: null,
-              unit: null
             },
             {
               name: "Burguer completa",
               description: "Pan de sésamo, Carne de vacuno, Queso, Cebolla blanca, lechuga y tomate",
               price: 4.8,
-              priceByRation: null,
-              unit: null
             }
           ]
         },
@@ -73,8 +61,6 @@ export const db: DB = {
               name: "Hot Dog XL",
               description: "Con pico de gallo o queso y cebolla frita",
               price: 3,
-              priceByRation: null,
-              unit: null
             }
           ]
         },

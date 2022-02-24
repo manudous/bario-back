@@ -1,5 +1,10 @@
 import { Router } from 'express';
 import { restaurantRepository } from 'dals';
+import {
+  mapRestaurantFromApiModelToModel,
+  mapRestaurantFromModelToApiModel,
+  mapRestaurantListFromModelToApiModel,
+} from './restaurant.mappers';
 
 export const restaurantApi = Router();
 
@@ -19,7 +24,7 @@ restaurantApi
         page,
         pageSize
       );
-      res.send(restaurantList);
+      res.send(mapRestaurantListFromModelToApiModel(restaurantList));
     } catch (error) {
       next(error);
     }
@@ -32,7 +37,7 @@ restaurantApi
     try {
       const { id } = req.params;
       const restaurant = await restaurantRepository.getRestaurant(id);
-      res.send(restaurant);
+      res.send(mapRestaurantFromModelToApiModel(restaurant));
     } catch (error) {
       next(error);
     }
@@ -42,7 +47,7 @@ restaurantApi
   // and use a JSON as Restaurant Model
   .post('/', async (req, res, next) => {
     try {
-      const restaurant = req.body;
+      const restaurant = mapRestaurantFromApiModelToModel(req.body);
       const newRestaurant = await restaurantRepository.saveRestaurant(
         restaurant
       );
@@ -58,8 +63,8 @@ restaurantApi
     try {
       const { id } = req.params;
       const restaurant = req.body;
-      await restaurantRepository.saveRestaurant(restaurant);
-      res.sendStatus(204);
+      await restaurantRepository.saveRestaurant({ ...restaurant, id });
+      res.sendStatus(204).send('Restaurant modify');
     } catch (error) {
       next(error);
     }
@@ -71,7 +76,7 @@ restaurantApi
     try {
       const { id } = req.params;
       await restaurantRepository.deleteRestaurant(id);
-      res.sendStatus(204);
+      res.sendStatus(204).send('Restaurant deleted');
     } catch (error) {
       next(error);
     }

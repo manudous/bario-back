@@ -1,47 +1,11 @@
 import { RestaurantRepository } from './restaurant.repository';
 import { Restaurant } from '../restaurant.model';
 import { db } from '../../mock-data';
-
-// TODO Test to this function
-const paginateRestaurantList = (
-  restaurantList: Restaurant[],
-  page: number,
-  pageSize: number
-) => {
-  if (Array.isArray(restaurantList)) {
-    if (page && pageSize) {
-      let paginatedRestaurant = [...restaurantList];
-      const startIndex = (page - 1) * pageSize;
-      const endIndex = Math.min(
-        startIndex + pageSize,
-        paginatedRestaurant.length
-      );
-      paginatedRestaurant = paginatedRestaurant.slice(startIndex, endIndex);
-
-      return paginatedRestaurant;
-    } else return restaurantList;
-  } else return [];
-};
-
-const insertRestaurant = async (restaurant) => {
-  const id = String(db.restaurants.length + 1);
-  const newRestaurant = {
-    ...restaurant,
-    id,
-  };
-
-  db.restaurants = [...db.restaurants, newRestaurant];
-  return newRestaurant;
-};
-
-const updateRestaurant = async (updateRestaurant: Restaurant) => {
-  db.restaurants = db.restaurants.map((restaurant) =>
-    restaurant.id === updateRestaurant.id
-      ? { ...restaurant, ...updateRestaurant }
-      : restaurant
-  );
-  return db.restaurants;
-};
+import {
+  insertRestaurant,
+  paginateRestaurantList,
+  updateRestaurant,
+} from './restaurant.mock-repository.helpers';
 
 export const mockRepository: RestaurantRepository = {
   getRestaurantList: async (page: number, pageSize: number) =>
